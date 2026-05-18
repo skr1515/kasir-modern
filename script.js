@@ -3,7 +3,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   getFirestore,
   collection,
-  addDoc
+  addDoc,
+  getDocs
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -83,6 +84,7 @@ window.tambahItem = async function(){
     });
 
     console.log("Transaksi berhasil disimpan");
+    loadRiwayat();
 
   } catch(error){
 
@@ -102,3 +104,38 @@ window.hapusItem = function(button, total){
     totalBayar;
 
 }
+
+async function loadRiwayat(){
+
+  const querySnapshot =
+    await getDocs(collection(db, "transaksi"));
+
+  const riwayatBody =
+    document.getElementById("riwayatBody");
+
+  riwayatBody.innerHTML = "";
+
+  querySnapshot.forEach((doc) => {
+
+    const data = doc.data();
+
+    const row = `
+      <tr>
+        <td>${data.menu}</td>
+        <td>${data.qty}</td>
+        <td>Rp ${data.total}</td>
+        <td>
+          ${new Date(
+            data.createdAt.seconds * 1000
+          ).toLocaleString()}
+        </td>
+      </tr>
+    `;
+
+    riwayatBody.innerHTML += row;
+
+  });
+
+}
+
+loadRiwayat();
