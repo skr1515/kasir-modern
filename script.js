@@ -46,7 +46,8 @@ window.tambahItem = async function(){
 
   totalBayar += total;
 
-  const tbody = document.getElementById("tbody");
+  const tbody =
+   document.getElementById("tbody");
 
   const row = `
     <tr>
@@ -127,7 +128,8 @@ async function loadRiwayat(){
         <td>
           ${new Date(
             data.createdAt.seconds * 1000
-          ).toLocaleString()}
+          ).toLocaleString()
+        : "-"}
         </td>
       </tr>
     `;
