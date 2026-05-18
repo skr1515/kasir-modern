@@ -25,7 +25,9 @@ const db = getFirestore(app);
 
 let totalBayar = 0;
 
-window.tambahItem = async function(){
+let keranjang = [];
+
+window.tambahItem = function(){
 
   const menu = document.getElementById("menu");
 
@@ -43,6 +45,13 @@ window.tambahItem = async function(){
   }
 
   const total = harga * qty;
+
+  keranjang.push({
+  menu: namaMenu,
+  harga: harga,
+  qty: qty,
+  total: total
+});
 
   totalBayar += total;
 
@@ -71,27 +80,6 @@ window.tambahItem = async function(){
 
   document.getElementById("qty").value = "";
 
-  // SIMPAN KE FIREBASE
-  try {
-
-    await addDoc(collection(db, "transaksi"), {
-
-      menu: namaMenu,
-      harga: harga,
-      qty: qty,
-      total: total,
-      createdAt: new Date()
-
-    });
-
-    console.log("Transaksi berhasil disimpan");
-    loadRiwayat();
-
-  } catch(error){
-
-    console.error(error);
-
-  }
 
 }
 
@@ -132,11 +120,20 @@ docs.sort((a, b) => {
 docs.forEach((data) => {
 
 
-    const row = `
+    const daftarItem = data.items
+  .map(item =>
+    `${item.menu} x${item.qty}`
+  )
+  .join("<br>");
+
+const row = `
   <tr>
-    <td>${data.menu}</td>
-    <td>${data.qty}</td>
+    <td>${data.nama}</td>
+
+    <td>${daftarItem}</td>
+
     <td>Rp ${data.total}</td>
+
     <td>
       ${data.createdAt
         ? new Date(
@@ -172,7 +169,18 @@ window.toggleRiwayat = function(){
 
 }
 
-window.bayarSekarang = function(){
+window.bayarSekarang = async function(){
+
+  const nama =
+    document.getElementById("namaPemesan").value;
+
+  if(!nama){
+
+    alert("Masukkan nama pemesan!");
+
+    return;
+
+  }
 
   if(totalBayar <= 0){
 
@@ -182,18 +190,43 @@ window.bayarSekarang = function(){
 
   }
 
-  alert(
-    "Pembayaran berhasil!\n" +
-    "Total Bayar: Rp " + totalBayar
-  );
+  try{
 
-  // reset tabel transaksi
-  document.getElementById("tbody").innerHTML = "";
+    await addDoc(collection(db, "transaksi"), {
 
-  // reset total
-  totalBayar = 0;
+      nama: nama,
+      items: keranjang,
+      total: totalBayar,
+      createdAt: new Date()
 
-  document.getElementById("totalBayar").innerText =
-    totalBayar;
+    });
+
+    alert(
+      "Pembayaran berhasil!\n" +
+      "Total: Rp " + totalBayar
+    );
+
+    // reset tabel
+    document.getElementById("tbody").innerHTML = "";
+
+    // reset input
+    document.getElementById("namaPemesan").value = "";
+
+    // reset total
+    totalBayar = 0;
+
+    document.getElementById("totalBayar").innerText =
+      totalBayar;
+
+    // reset keranjang
+    keranjang = [];
+
+    loadRiwayat();
+
+  } catch(error){
+
+    console.error(error);
+
+  }
 
 }
