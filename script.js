@@ -126,43 +126,28 @@ async function loadRiwayat(){
   });
 
   // tanggal hari ini
-  const today =
-    new Date().toLocaleDateString();
-
   docs.forEach((data) => {
 
-    // format tanggal transaksi
-    const tanggalTransaksi =
-      data.createdAt
-        ? new Date(
-            data.createdAt.seconds * 1000
-          ).toLocaleDateString()
-        : "";
+  // total semua transaksi
+  totalHarian += data.total;
 
-    // hanya hitung hari ini
-    if(tanggalTransaksi === today){
+  if(data.metode === "Cash"){
 
-      totalHarian += data.total;
+    cash += data.total;
 
-      if(data.metode === "Cash"){
+  }
 
-        cash += data.total;
+  if(data.metode === "Debit"){
 
-      }
+    debit += data.total;
 
-      if(data.metode === "Debit"){
+  }
 
-        debit += data.total;
+  if(data.metode === "QRIS"){
 
-      }
+    qris += data.total;
 
-      if(data.metode === "QRIS"){
-
-        qris += data.total;
-
-      }
-
-    }
+  }
 
     // daftar item
     const daftarItem = data.items
