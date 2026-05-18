@@ -27,6 +27,18 @@ let totalBayar = 0;
 
 let keranjang = [];
 
+function formatRupiah(angka){
+
+  return new Intl.NumberFormat(
+    "id-ID",
+    {
+      style: "currency",
+      currency: "IDR"
+    }
+  ).format(angka);
+
+}
+
 window.tambahItem = function(){
 
   const menu = document.getElementById("menu");
@@ -61,9 +73,9 @@ window.tambahItem = function(){
   const row = `
     <tr>
       <td>${namaMenu}</td>
-      <td>Rp ${harga}</td>
+      <td>${formatRupiah(harga)}</td>
       <td>${qty}</td>
-      <td>Rp ${total}</td>
+      <td>${formatRupiah(total)}</td>
       <td>
         <button class="hapus"
           onclick="hapusItem(this, ${total})">
@@ -76,7 +88,7 @@ window.tambahItem = function(){
   tbody.innerHTML += row;
 
   document.getElementById("totalBayar").innerText =
-    totalBayar;
+  formatRupiah(totalBayar);
 
   document.getElementById("qty").value = "";
 
@@ -90,7 +102,7 @@ window.hapusItem = function(button, total){
   button.parentElement.parentElement.remove();
 
   document.getElementById("totalBayar").innerText =
-    totalBayar;
+  formatRupiah(totalBayar);
 
 }
 
@@ -176,9 +188,9 @@ if(data.items){
 
         <td>${data.metode}</td>
 
-        <td>Rp ${data.total}</td>
+        <td>${formatRupiah(data.total)}</td>
 
-        <td>Rp ${data.kembalian || 0}</td>
+        <td>${formatRupiah(data.kembalian || 0)}</td>
 
         <td>
           ${data.createdAt
@@ -197,21 +209,25 @@ if(data.items){
 
   // tampilkan reporting realtime
 
-  document.getElementById(
-    "pendapatanHarian"
-  ).innerText = totalHarian;
+ document.getElementById(
+  "pendapatanHarian"
+).innerText =
+  formatRupiah(totalHarian);
 
-  document.getElementById(
-    "totalCash"
-  ).innerText = cash;
+document.getElementById(
+  "totalCash"
+).innerText =
+  formatRupiah(cash);
 
-  document.getElementById(
-    "totalDebit"
-  ).innerText = debit;
+document.getElementById(
+  "totalDebit"
+).innerText =
+  formatRupiah(debit);
 
-  document.getElementById(
-    "totalQris"
-  ).innerText = qris;
+document.getElementById(
+  "totalQris"
+).innerText =
+  formatRupiah(qris);
 
 }
 
@@ -299,8 +315,8 @@ window.bayarSekarang = async function(){
 
       "Nama: " + nama + "\n" +
       "Metode: " + metode + "\n" +
-      "Total: Rp " + totalBayar + "\n" +
-      "Kembalian: Rp " + kembalian
+      "Total: " + formatRupiah(totalBayar) + "\n" +
+      "Kembalian: " + formatRupiah(kembalian)
     );
 
     // reset tabel
@@ -310,7 +326,7 @@ window.bayarSekarang = async function(){
     totalBayar = 0;
 
     document.getElementById("totalBayar").innerText =
-      totalBayar;
+  formatRupiah(totalBayar);
 
     // reset input
     document.getElementById("namaPemesan").value = "";
