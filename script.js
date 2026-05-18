@@ -150,11 +150,22 @@ async function loadRiwayat(){
   }
 
     // daftar item
-    const daftarItem = data.items
-      .map(item =>
-        `${item.menu} x${item.qty}`
-      )
-      .join("<br>");
+    let daftarItem = "";
+
+if(data.items){
+
+  daftarItem = data.items
+    .map(item =>
+      `${item.menu} x${item.qty}`
+    )
+    .join("<br>");
+
+} else {
+
+  daftarItem =
+    `${data.menu || "-"} x${data.qty || 1}`;
+
+}
 
     const row = `
       <tr>
