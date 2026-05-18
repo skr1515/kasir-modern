@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Kasir Modern</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <h1>☕ Kasir Cafe Modern</h1>
+
+  <div class="form-section">
+
+    <select id="menu">
+      <option value="15000">Americano - 15000</option>
+      <option value="18000">Cappuccino - 18000</option>
+      <option value="20000">Matcha Latte - 20000</option>
+      <option value="25000">Croissant - 25000</option>
+    </select>
+
+    <input type="number" id="qty" placeholder="Jumlah">
+
+    <button onclick="tambahItem()">
+      Tambah
+    </button>
+
+  </div>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Menu</th>
+        <th>Harga</th>
+        <th>Qty</th>
+        <th>Total</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+
+    <tbody id="tbody">
+
+    </tbody>
+
+  </table>
+
+  <div class="total-box">
+    Total Bayar:
+    Rp <span id="totalBayar">0</span>
+  </div>
+
+</div>
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
