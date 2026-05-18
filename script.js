@@ -105,89 +105,117 @@ async function loadRiwayat(){
   riwayatBody.innerHTML = "";
 
   let totalHarian = 0;
-let cash = 0;
-let debit = 0;
-let qris = 0;
+  let cash = 0;
+  let debit = 0;
+  let qris = 0;
 
   const docs = [];
 
-querySnapshot.forEach((doc) => {
-  docs.push(doc.data());
-});
+  querySnapshot.forEach((doc) => {
 
-docs.sort((a, b) => {
+    docs.push(doc.data());
 
-  return b.createdAt.seconds -
-         a.createdAt.seconds;
+  });
 
-});
+  // urut terbaru
+  docs.sort((a, b) => {
 
-docs.forEach((data) => {
+    return b.createdAt.seconds -
+           a.createdAt.seconds;
 
-// total pendapatan
-totalHarian += data.total;
+  });
 
-// metode pembayaran
-if(data.metode === "Cash"){
-  cash += data.total;
-}
+  // tanggal hari ini
+  const today =
+    new Date().toLocaleDateString();
 
-if(data.metode === "Debit"){
-  debit += data.total;
-}
+  docs.forEach((data) => {
 
-if(data.metode === "QRIS"){
-  qris += data.total;
-}
-
-    const daftarItem = data.items
-  .map(item =>
-    `${item.menu} x${item.qty}`
-  )
-  .join("<br>");
-
-const row = `
-  <tr>
-
-    <td>${data.nama}</td>
-
-    <td>${daftarItem}</td>
-
-    <td>${data.metode}</td>
-
-    <td>Rp ${data.total}</td>
-
-    <td>Rp ${data.kembalian || 0}</td>
-
-    <td>
-      ${data.createdAt
+    // format tanggal transaksi
+    const tanggalTransaksi =
+      data.createdAt
         ? new Date(
             data.createdAt.seconds * 1000
-          ).toLocaleString()
-        : "-"}
-    </td>
+          ).toLocaleDateString()
+        : "";
 
-  </tr>
-`;
+    // hanya hitung hari ini
+    if(tanggalTransaksi === today){
+
+      totalHarian += data.total;
+
+      if(data.metode === "Cash"){
+
+        cash += data.total;
+
+      }
+
+      if(data.metode === "Debit"){
+
+        debit += data.total;
+
+      }
+
+      if(data.metode === "QRIS"){
+
+        qris += data.total;
+
+      }
+
+    }
+
+    // daftar item
+    const daftarItem = data.items
+      .map(item =>
+        `${item.menu} x${item.qty}`
+      )
+      .join("<br>");
+
+    const row = `
+      <tr>
+
+        <td>${data.nama}</td>
+
+        <td>${daftarItem}</td>
+
+        <td>${data.metode}</td>
+
+        <td>Rp ${data.total}</td>
+
+        <td>Rp ${data.kembalian || 0}</td>
+
+        <td>
+          ${data.createdAt
+            ? new Date(
+                data.createdAt.seconds * 1000
+              ).toLocaleString()
+            : "-"}
+        </td>
+
+      </tr>
+    `;
 
     riwayatBody.innerHTML += row;
 
   });
 
-// tampilkan reporting
+  // tampilkan reporting realtime
 
-document.getElementById("pendapatanHarian")
-  .innerText = totalHarian;
+  document.getElementById(
+    "pendapatanHarian"
+  ).innerText = totalHarian;
 
-document.getElementById("totalCash")
-  .innerText = cash;
+  document.getElementById(
+    "totalCash"
+  ).innerText = cash;
 
-document.getElementById("totalDebit")
-  .innerText = debit;
+  document.getElementById(
+    "totalDebit"
+  ).innerText = debit;
 
-document.getElementById("totalQris")
-  .innerText = qris;
-
+  document.getElementById(
+    "totalQris"
+  ).innerText = qris;
 
 }
 
