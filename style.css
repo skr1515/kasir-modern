@@ -67,3 +67,16 @@ body{
     font-size:24px;
     font-weight:bold;
   }
+
+  .riwayat-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#riwayatContainer{
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 10px;
+}

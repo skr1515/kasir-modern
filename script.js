@@ -116,9 +116,21 @@ async function loadRiwayat(){
 
   riwayatBody.innerHTML = "";
 
-  querySnapshot.forEach((doc) => {
+  const docs = [];
 
-    const data = doc.data();
+querySnapshot.forEach((doc) => {
+  docs.push(doc.data());
+});
+
+docs.sort((a, b) => {
+
+  return b.createdAt.seconds -
+         a.createdAt.seconds;
+
+});
+
+docs.forEach((data) => {
+
 
     const row = `
   <tr>
@@ -142,3 +154,20 @@ async function loadRiwayat(){
 }
 
 loadRiwayat();
+
+window.toggleRiwayat = function(){
+
+  const riwayat =
+    document.getElementById("riwayatContainer");
+
+  if(riwayat.style.display === "none"){
+
+    riwayat.style.display = "block";
+
+  } else {
+
+    riwayat.style.display = "none";
+
+  }
+
+}
