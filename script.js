@@ -128,11 +128,16 @@ docs.forEach((data) => {
 
 const row = `
   <tr>
+
     <td>${data.nama}</td>
 
     <td>${daftarItem}</td>
 
+    <td>${data.metode}</td>
+
     <td>Rp ${data.total}</td>
+
+    <td>Rp ${data.kembalian || 0}</td>
 
     <td>
       ${data.createdAt
@@ -141,6 +146,7 @@ const row = `
           ).toLocaleString()
         : "-"}
     </td>
+
   </tr>
 `;
 
@@ -174,6 +180,14 @@ window.bayarSekarang = async function(){
   const nama =
     document.getElementById("namaPemesan").value;
 
+  const metode =
+    document.getElementById("metodeBayar").value;
+
+  const uangBayar =
+    parseInt(
+      document.getElementById("uangBayar").value
+    );
+
   if(!nama){
 
     alert("Masukkan nama pemesan!");
@@ -190,11 +204,31 @@ window.bayarSekarang = async function(){
 
   }
 
+  let kembalian = 0;
+
+  // kalau cash wajib isi uang
+  if(metode === "Cash"){
+
+    if(!uangBayar || uangBayar < totalBayar){
+
+      alert("Uang customer kurang!");
+
+      return;
+
+    }
+
+    kembalian = uangBayar - totalBayar;
+
+  }
+
   try{
 
     await addDoc(collection(db, "transaksi"), {
 
       nama: nama,
+      metode: metode,
+      bayar: uangBayar || totalBayar,
+      kembalian: kembalian,
       items: keranjang,
       total: totalBayar,
       createdAt: new Date()
@@ -202,21 +236,27 @@ window.bayarSekarang = async function(){
     });
 
     alert(
-      "Pembayaran berhasil!\n" +
-      "Total: Rp " + totalBayar
+      "Pembayaran berhasil!\n\n" +
+
+      "Nama: " + nama + "\n" +
+      "Metode: " + metode + "\n" +
+      "Total: Rp " + totalBayar + "\n" +
+      "Kembalian: Rp " + kembalian
     );
 
     // reset tabel
     document.getElementById("tbody").innerHTML = "";
-
-    // reset input
-    document.getElementById("namaPemesan").value = "";
 
     // reset total
     totalBayar = 0;
 
     document.getElementById("totalBayar").innerText =
       totalBayar;
+
+    // reset input
+    document.getElementById("namaPemesan").value = "";
+
+    document.getElementById("uangBayar").value = "";
 
     // reset keranjang
     keranjang = [];

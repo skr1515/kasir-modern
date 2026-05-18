@@ -21,6 +21,20 @@
   placeholder="Nama Pemesan"
 />
 
+  <select id="metodeBayar">
+
+  <option value="Cash">Cash</option>
+  <option value="Debit">Debit</option>
+  <option value="QRIS">QRIS</option>
+
+</select>
+
+<input
+  type="number"
+  id="uangBayar"
+  placeholder="Uang Customer"
+/>
+
     <select id="menu">
       <option value="15000">Americano - 15000</option>
       <option value="18000">Cappuccino - 18000</option>
@@ -87,11 +101,13 @@
 
   <thead>
     <tr>
-      <th>Menu</th>
-      <th>Pesanan</th>
-      <th>Total</th>
-      <th>Tanggal</th>
-    </tr>
+  <th>Nama</th>
+  <th>Pesanan</th>
+  <th>Metode</th>
+  <th>Total</th>
+  <th>Kembalian</th>
+  <th>Tanggal</th>
+</tr>
   </thead>
 
   <tbody id="riwayatBody">
