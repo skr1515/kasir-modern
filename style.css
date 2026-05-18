@@ -80,3 +80,28 @@ body{
   overflow-y: auto;
   margin-top: 10px;
 }
+
+.total-box{
+  text-align: center;
+  margin: 25px 0;
+}
+
+.total-box h1{
+  font-size: 40px;
+  color: #2e7d32;
+}
+
+.bayar-btn{
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.bayar-btn:hover{
+  opacity: 0.9;
+}

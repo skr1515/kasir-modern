@@ -171,3 +171,29 @@ window.toggleRiwayat = function(){
   }
 
 }
+
+window.bayarSekarang = function(){
+
+  if(totalBayar <= 0){
+
+    alert("Belum ada transaksi!");
+
+    return;
+
+  }
+
+  alert(
+    "Pembayaran berhasil!\n" +
+    "Total Bayar: Rp " + totalBayar
+  );
+
+  // reset tabel transaksi
+  document.getElementById("tbody").innerHTML = "";
+
+  // reset total
+  totalBayar = 0;
+
+  document.getElementById("totalBayar").innerText =
+    totalBayar;
+
+}
