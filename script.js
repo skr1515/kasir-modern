@@ -121,18 +121,19 @@ async function loadRiwayat(){
     const data = doc.data();
 
     const row = `
-      <tr>
-        <td>${data.menu}</td>
-        <td>${data.qty}</td>
-        <td>Rp ${data.total}</td>
-        <td>
-          ${new Date(
+  <tr>
+    <td>${data.menu}</td>
+    <td>${data.qty}</td>
+    <td>Rp ${data.total}</td>
+    <td>
+      ${data.createdAt
+        ? new Date(
             data.createdAt.seconds * 1000
           ).toLocaleString()
         : "-"}
-        </td>
-      </tr>
-    `;
+    </td>
+  </tr>
+`;
 
     riwayatBody.innerHTML += row;
 
