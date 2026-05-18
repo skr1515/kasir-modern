@@ -1,107 +1,271 @@
-body{
-    margin:0;
-    padding:20px;
-    font-family:Arial;
-    background:#f4f6f9;
-  }
-  
-  .container{
-    max-width:900px;
-    margin:auto;
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 0 15px rgba(0,0,0,0.1);
-  }
-  
-  h1{
-    text-align:center;
-    margin-bottom:30px;
-  }
-  
-  .form-section{
-    display:flex;
-    gap:10px;
-    margin-bottom:20px;
-  }
-  
-  select,input{
-    flex:1;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-  }
-  
-  button{
-    padding:12px 20px;
-    border:none;
-    background:#007bff;
-    color:white;
-    border-radius:8px;
-    cursor:pointer;
-  }
-  
-  button:hover{
-    background:#0056b3;
-  }
-  
-  table{
-    width:100%;
-    border-collapse:collapse;
-  }
-  
-  table th,
-  table td{
-    border:1px solid #ddd;
-    padding:12px;
-    text-align:center;
-  }
-  
-  .hapus{
-    background:red;
-  }
-  
-  .total-box{
-    margin-top:20px;
-    text-align:right;
-    font-size:24px;
-    font-weight:bold;
-  }
+/* IMPORT FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-  .riwayat-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 30px;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
-#riwayatContainer{
-  max-height: 300px;
-  overflow-y: auto;
+body{
+  background: #e9d7c3;
+  min-height: 100vh;
+  padding: 40px;
+}
+
+/* CONTAINER */
+.container{
+  width: 95%;
+  max-width: 1400px;
+  margin: auto;
+
+  background: rgba(255,255,255,0.65);
+
+  backdrop-filter: blur(10px);
+
+  border-radius: 30px;
+
+  padding: 40px;
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.1);
+}
+
+/* JUDUL */
+.logo{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo h1{
+  font-size: 55px;
+  color: #5c4033;
+  font-weight: 700;
+}
+
+.logo p{
+  color: #7a5c4d;
   margin-top: 10px;
 }
 
+/* FORM */
+.form-section{
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.form-section input,
+.form-section select{
+
+  padding: 15px;
+  border-radius: 14px;
+  border: 1px solid #d8c1ae;
+  background: rgba(255,255,255,0.8);
+
+  font-size: 15px;
+
+  flex: 1;
+  min-width: 180px;
+}
+
+.form-section button{
+
+  background: #4f7c4f;
+  color: white;
+
+  border: none;
+
+  padding: 15px 30px;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  transition: 0.3s;
+}
+
+.form-section button:hover{
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+/* TOTAL */
 .total-box{
   text-align: center;
-  margin: 25px 0;
+  margin-bottom: 40px;
+}
+
+.total-box h2{
+  font-size: 50px;
+  color: #3d2b1f;
+}
+
+.total-box p{
+  font-size: 20px;
+  color: #777;
 }
 
 .total-box h1{
-  font-size: 40px;
-  color: #2e7d32;
+  color: #4f7c4f;
+  font-size: 60px;
+  margin-top: 15px;
 }
 
+/* BUTTON BAYAR */
 .bayar-btn{
-  background: #2e7d32;
+
+  margin-top: 20px;
+
+  background: #4f7c4f;
   color: white;
+
   border: none;
-  padding: 12px 25px;
-  border-radius: 10px;
+
+  padding: 15px 35px;
+
+  border-radius: 16px;
+
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  transition: 0.3s;
 }
 
 .bayar-btn:hover{
-  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* TABLE */
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+}
+
+table thead{
+  background: #a67b5b;
+  color: white;
+}
+
+table th,
+table td{
+
+  padding: 18px;
+  text-align: center;
+}
+
+table tbody tr{
+
+  background: rgba(255,255,255,0.7);
+
+  border-bottom:
+    1px solid rgba(0,0,0,0.05);
+}
+
+/* BUTTON HAPUS */
+.hapus{
+
+  background: #d9534f;
+
+  color: white;
+
+  border: none;
+
+  padding: 8px 15px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+/* RIWAYAT */
+.riwayat-header{
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 50px;
+}
+
+.riwayat-header h2{
+
+  color: #5c4033;
+  font-size: 35px;
+}
+
+.riwayat-header button{
+
+  background: #e8d5c4;
+
+  border: none;
+
+  padding: 12px 25px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  color: #5c4033;
+
+  font-weight: 600;
+}
+
+/* SCROLL RIWAYAT */
+#riwayatContainer{
+
+  max-height: 350px;
+
+  overflow-y: auto;
+
+  margin-top: 20px;
+}
+
+/* TOTAL BAWAH */
+.footer-total{
+
+  text-align: center;
+
+  margin-top: 30px;
+
+  font-size: 30px;
+
+  color: #4f7c4f;
+
+  font-weight: 700;
+}
+
+/* RESPONSIVE */
+@media(max-width: 900px){
+
+  .form-section{
+    flex-direction: column;
+  }
+
+  .logo h1{
+    font-size: 40px;
+  }
+
+  .total-box h2{
+    font-size: 35px;
+  }
+
+  .total-box h1{
+    font-size: 45px;
+  }
+
 }
