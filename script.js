@@ -104,6 +104,11 @@ async function loadRiwayat(){
 
   riwayatBody.innerHTML = "";
 
+  let totalHarian = 0;
+let cash = 0;
+let debit = 0;
+let qris = 0;
+
   const docs = [];
 
 querySnapshot.forEach((doc) => {
@@ -119,6 +124,21 @@ docs.sort((a, b) => {
 
 docs.forEach((data) => {
 
+// total pendapatan
+totalHarian += data.total;
+
+// metode pembayaran
+if(data.metode === "Cash"){
+  cash += data.total;
+}
+
+if(data.metode === "Debit"){
+  debit += data.total;
+}
+
+if(data.metode === "QRIS"){
+  qris += data.total;
+}
 
     const daftarItem = data.items
   .map(item =>
@@ -153,6 +173,21 @@ const row = `
     riwayatBody.innerHTML += row;
 
   });
+
+// tampilkan reporting
+
+document.getElementById("pendapatanHarian")
+  .innerText = totalHarian;
+
+document.getElementById("totalCash")
+  .innerText = cash;
+
+document.getElementById("totalDebit")
+  .innerText = debit;
+
+document.getElementById("totalQris")
+  .innerText = qris;
+
 
 }
 

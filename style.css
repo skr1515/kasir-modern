@@ -269,3 +269,38 @@ table tbody tr{
   }
 
 }
+
+/* REPORT */
+.report-box{
+  margin-top: 50px;
+}
+
+.report-box h2{
+  color: #5c4033;
+  margin-bottom: 20px;
+  font-size: 35px;
+}
+
+.report-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 20px;
+}
+
+.card-report{
+  background: rgba(255,255,255,0.7);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.card-report h3{
+  color: #7a5c4d;
+  margin-bottom: 15px;
+}
+
+.card-report h1{
+  color: #4f7c4f;
+  font-size: 35px;
+}
