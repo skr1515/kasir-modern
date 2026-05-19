@@ -128,6 +128,9 @@ async function loadRiwayat(){
   let cash = 0;
   let debit = 0;
   let qris = 0;
+  let cashSemua = 0;
+let debitSemua = 0;
+let qrisSemua = 0;
 
   const docs = [];
 
@@ -150,6 +153,24 @@ async function loadRiwayat(){
 
     // total semua pendapatan
 totalSemua += data.total;
+
+if(data.metode === "Cash"){
+
+  cashSemua += data.total;
+
+}
+
+if(data.metode === "Debit"){
+
+  debitSemua += data.total;
+
+}
+
+if(data.metode === "QRIS"){
+
+  qrisSemua += data.total;
+
+}
   
     // cek tanggal hari ini
 
@@ -262,23 +283,38 @@ document.getElementById(
 ).innerText =
   formatRupiah(totalSemua);
 
- document.getElementById(
+document.getElementById(
+  "cashSemua"
+).innerText =
+  formatRupiah(cashSemua);
+
+document.getElementById(
+  "debitSemua"
+).innerText =
+  formatRupiah(debitSemua);
+
+document.getElementById(
+  "qrisSemua"
+).innerText =
+  formatRupiah(qrisSemua);
+
+document.getElementById(
   "pendapatanHarian"
 ).innerText =
   formatRupiah(totalHarian);
 
 document.getElementById(
-  "totalCash"
+  "cashHarian"
 ).innerText =
   formatRupiah(cash);
 
 document.getElementById(
-  "totalDebit"
+  "debitHarian"
 ).innerText =
   formatRupiah(debit);
 
 document.getElementById(
-  "totalQris"
+  "qrisHarian"
 ).innerText =
   formatRupiah(qris);
 
@@ -558,5 +594,29 @@ window.filterLaporan = async function(){
     "\n\nTotal: " +
     formatRupiah(total)
   );
+
+}
+
+window.showHarian = function(){
+
+  document.getElementById(
+    "reportHarian"
+  ).style.display = "grid";
+
+  document.getElementById(
+    "reportSemua"
+  ).style.display = "none";
+
+}
+
+window.showSemua = function(){
+
+  document.getElementById(
+    "reportHarian"
+  ).style.display = "none";
+
+  document.getElementById(
+    "reportSemua"
+  ).style.display = "grid";
 
 }

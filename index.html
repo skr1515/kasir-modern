@@ -128,19 +128,157 @@
 <div class="report-box"
   id="reportContainer">
 
-  <h2>📊 Reporting Pendapatan Harian</h2>
+  <h2>📊 Reporting Pendapatan</h2>
 
-  <div class="report-grid">
+  <!-- REPORTING -->
 
-    <div class="card-report">
+<div class="report-section">
 
-  <h3>Total Semua Pendapatan</h3>
+  <div class="report-top">
 
-  <h1>
-    <span id="totalSemua">
-      Rp 0
-    </span>
-  </h1>
+    <h2>
+      📊 Reporting Pendapatan
+    </h2>
+
+    <div class="report-actions">
+
+      <input
+        type="date"
+        id="filterTanggal"
+      >
+
+      <button onclick="filterLaporan()">
+        Cari
+      </button>
+
+      <button onclick="toggleReport()">
+        Lihat / Sembunyikan
+      </button>
+
+    </div>
+
+  </div>
+
+  <div id="reportContainer">
+
+    <!-- tombol pilihan -->
+
+    <div class="report-menu">
+
+      <button onclick="showHarian()">
+
+        Report Harian
+
+      </button>
+
+      <button onclick="showSemua()">
+
+        Report Keseluruhan
+
+      </button>
+
+    </div>
+
+    <!-- REPORT HARIAN -->
+
+    <div
+      class="report-grid"
+      id="reportHarian"
+    >
+
+      <div class="card-report">
+
+        <h3>Total Hari Ini</h3>
+
+        <h1 id="pendapatanHarian">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>Cash</h3>
+
+        <h1 id="cashHarian">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>Debit</h3>
+
+        <h1 id="debitHarian">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>QRIS</h3>
+
+        <h1 id="qrisHarian">
+          Rp 0
+        </h1>
+
+      </div>
+
+    </div>
+
+    <!-- REPORT SEMUA -->
+
+    <div
+      class="report-grid"
+      id="reportSemua"
+      style="display:none;"
+    >
+
+      <div class="card-report">
+
+        <h3>Total Semua</h3>
+
+        <h1 id="totalSemua">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>Cash</h3>
+
+        <h1 id="cashSemua">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>Debit</h3>
+
+        <h1 id="debitSemua">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>QRIS</h3>
+
+        <h1 id="qrisSemua">
+          Rp 0
+        </h1>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
