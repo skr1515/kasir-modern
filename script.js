@@ -12,7 +12,7 @@ import {
   collection,
   addDoc,
   getDocs,
-  updateDoc,
+  updateDogitc,
   deleteDoc,
   doc
 }
