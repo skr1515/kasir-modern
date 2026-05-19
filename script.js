@@ -124,6 +124,7 @@ async function loadRiwayat(){
   riwayatBody.innerHTML = "";
 
   let totalHarian = 0;
+  let totalSemua = 0;
   let cash = 0;
   let debit = 0;
   let qris = 0;
@@ -146,6 +147,9 @@ async function loadRiwayat(){
 
   // tanggal hari ini
   docs.forEach((data) => {
+
+    // total semua pendapatan
+totalSemua += data.total;
   
     // cek tanggal hari ini
 
@@ -160,9 +164,27 @@ const tanggalTransaksi =
     : "";
 
 // kalau bukan hari ini skip
-if(tanggalTransaksi !== today){
+if(tanggalTransaksi === today){
 
-  return;
+  totalHarian += data.total;
+
+  if(data.metode === "Cash"){
+
+    cash += data.total;
+
+  }
+
+  if(data.metode === "Debit"){
+
+    debit += data.total;
+
+  }
+
+  if(data.metode === "QRIS"){
+
+    qris += data.total;
+
+  }
 
 }
 
@@ -234,6 +256,11 @@ if(data.items){
   });
 
   // tampilkan reporting realtime
+
+document.getElementById(
+  "totalSemua"
+).innerText =
+  formatRupiah(totalSemua);
 
  document.getElementById(
   "pendapatanHarian"
@@ -478,5 +505,58 @@ document.getElementById(
     report.style.display = "none";
 
   }
+
+}
+
+window.filterLaporan = async function(){
+
+  const tanggal =
+    document.getElementById(
+      "filterTanggal"
+    ).value;
+
+  if(!tanggal){
+
+    alert("Pilih tanggal!");
+
+    return;
+
+  }
+
+  const querySnapshot =
+    await getDocs(collection(db, "transaksi"));
+
+  let total = 0;
+
+  querySnapshot.forEach((doc) => {
+
+    const data = doc.data();
+
+    if(data.createdAt){
+
+      const tgl =
+        new Date(
+          data.createdAt.seconds * 1000
+        );
+
+      const formatTanggal =
+        tgl.toISOString().split("T")[0];
+
+      if(formatTanggal === tanggal){
+
+        total += data.total;
+
+      }
+
+    }
+
+  });
+
+  alert(
+    "Pendapatan tanggal " +
+    tanggal +
+    "\n\nTotal: " +
+    formatRupiah(total)
+  );
 
 }

@@ -106,6 +106,17 @@
 
   <h2>📊 Reporting Pendapatan</h2>
 
+  <input
+  type="date"
+  id="filterTanggal"
+>
+
+<button onclick="filterLaporan()">
+
+  Cari Tanggal
+
+</button>
+
   <button onclick="toggleReport()">
 
     Lihat / Sembunyikan
@@ -117,9 +128,21 @@
 <div class="report-box"
   id="reportContainer">
 
-  <h2>📊 Reporting Pendapatan</h2>
+  <h2>📊 Reporting Pendapatan Harian</h2>
 
   <div class="report-grid">
+
+    <div class="card-report">
+
+  <h3>Total Semua Pendapatan</h3>
+
+  <h1>
+    <span id="totalSemua">
+      Rp 0
+    </span>
+  </h1>
+
+</div>
 
     <div class="card-report">
       <h3>Total Pendapatan Hari Ini</h3>
