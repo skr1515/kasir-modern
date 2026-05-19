@@ -113,7 +113,7 @@ window.hapusItem = function(button, total){
 
 }
 
-async function loadRiwayat(){
+window.loadRiwayat = async function(){
 
   const querySnapshot =
     await getDocs(collection(db, "transaksi"));
