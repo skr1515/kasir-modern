@@ -11,7 +11,10 @@ import {
   getFirestore,
   collection,
   addDoc,
-  getDocs
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  doc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -393,6 +396,7 @@ document.getElementById(
 }
 
 loadRiwayat();
+loadProduk();
 
 window.toggleRiwayat = function(){
 
@@ -637,5 +641,220 @@ window.showBulanan = function(){
   document.getElementById(
     "reportBulanan"
   ).style.display = "grid";
+
+}
+
+window.tambahProduk = async function(){
+
+  const nama =
+    document.getElementById(
+      "namaProduk"
+    ).value;
+
+  const harga =
+    parseInt(
+      document.getElementById(
+        "hargaProduk"
+      ).value
+    );
+
+  if(!nama || !harga){
+
+    alert("Isi produk!");
+
+    return;
+
+  }
+
+  try{
+
+    await addDoc(
+      collection(db, "produk"),
+      {
+
+        nama: nama,
+        harga: harga
+
+      }
+    );
+
+    alert("Produk berhasil ditambah");
+
+    document.getElementById(
+      "namaProduk"
+    ).value = "";
+
+    document.getElementById(
+      "hargaProduk"
+    ).value = "";
+
+    loadProduk();
+
+  } catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+window.loadProduk = async function(){
+
+  const querySnapshot =
+    await getDocs(
+      collection(db, "produk")
+    );
+
+  const produkBody =
+    document.getElementById(
+      "produkBody"
+    );
+
+  const menu =
+    document.getElementById(
+      "menu"
+    );
+
+  produkBody.innerHTML = "";
+
+  menu.innerHTML = "";
+
+  querySnapshot.forEach((docSnap) => {
+
+    const data = docSnap.data();
+
+    // dropdown kasir
+    menu.innerHTML += `
+
+      <option value="${data.harga}">
+
+        ${data.nama} -
+        ${data.harga}
+
+      </option>
+
+    `;
+
+    // tabel produk
+    produkBody.innerHTML += `
+
+      <tr>
+
+        <td>${data.nama}</td>
+
+        <td>
+          ${formatRupiah(data.harga)}
+        </td>
+
+        <td>
+
+          <button
+            onclick="editProduk(
+              '${docSnap.id}',
+              '${data.nama}',
+              '${data.harga}'
+            )"
+          >
+
+            Edit
+
+          </button>
+
+          <button
+            onclick="hapusProduk(
+              '${docSnap.id}'
+            )"
+          >
+
+            Hapus
+
+          </button>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  });
+
+}
+
+window.editProduk = async function(
+  id,
+  namaLama,
+  hargaLama
+){
+
+  const namaBaru =
+    prompt(
+      "Edit Nama Produk",
+      namaLama
+    );
+
+  const hargaBaru =
+    prompt(
+      "Edit Harga",
+      hargaLama
+    );
+
+  if(!namaBaru || !hargaBaru){
+
+    return;
+
+  }
+
+  try{
+
+    await updateDoc(
+      doc(db, "produk", id),
+      {
+
+        nama: namaBaru,
+        harga: parseInt(hargaBaru)
+
+      }
+    );
+
+    alert("Produk berhasil diupdate");
+
+    loadProduk();
+
+  } catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+window.hapusProduk = async function(id){
+
+  const yakin =
+    confirm(
+      "Hapus produk ini?"
+    );
+
+  if(!yakin){
+
+    return;
+
+  }
+
+  try{
+
+    await deleteDoc(
+      doc(db, "produk", id)
+    );
+
+    alert("Produk dihapus");
+
+    loadProduk();
+
+  } catch(error){
+
+    console.error(error);
+
+  }
 
 }
