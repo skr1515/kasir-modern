@@ -396,8 +396,6 @@ document.getElementById(
   formatRupiah(qrisBulanan);
 }
 
-window.loadRiwayat();
-window.loadProduk();
 
 window.toggleRiwayat = function(){
 
@@ -860,3 +858,6 @@ window.hapusProduk = async function(id){
 
 }
 
+// PALING BAWAH
+window.loadRiwayat();
+window.loadProduk();
