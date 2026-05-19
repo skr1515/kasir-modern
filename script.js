@@ -123,14 +123,24 @@ async function loadRiwayat(){
 
   riwayatBody.innerHTML = "";
 
-  let totalHarian = 0;
-  let totalSemua = 0;
-  let cash = 0;
-  let debit = 0;
-  let qris = 0;
-  let cashSemua = 0;
+let totalHarian = 0;
+let totalSemua = 0;
+
+let cash = 0;
+let debit = 0;
+let qris = 0;
+
+let cashSemua = 0;
 let debitSemua = 0;
 let qrisSemua = 0;
+
+// REPORT BULANAN
+
+let totalBulanan = 0;
+
+let cashBulanan = 0;
+let debitBulanan = 0;
+let qrisBulanan = 0;
 
   const docs = [];
 
@@ -151,6 +161,45 @@ let qrisSemua = 0;
   // tanggal hari ini
   docs.forEach((data) => {
 
+    const tanggal =
+  new Date(
+    data.createdAt.seconds * 1000
+  );
+
+const bulanSekarang =
+  new Date().getMonth();
+
+const tahunSekarang =
+  new Date().getFullYear();
+
+// REPORT BULANAN
+
+if(
+  tanggal.getMonth() === bulanSekarang &&
+  tanggal.getFullYear() === tahunSekarang
+){
+
+  totalBulanan += data.total;
+
+  if(data.metode === "Cash"){
+
+    cashBulanan += data.total;
+
+  }
+
+  if(data.metode === "Debit"){
+
+    debitBulanan += data.total;
+
+  }
+
+  if(data.metode === "QRIS"){
+
+    qrisBulanan += data.total;
+
+  }
+
+}
     // total semua pendapatan
 totalSemua += data.total;
 
@@ -208,27 +257,6 @@ if(tanggalTransaksi === today){
   }
 
 }
-
-  // total semua transaksi
-  totalHarian += data.total;
-
-  if(data.metode === "Cash"){
-
-    cash += data.total;
-
-  }
-
-  if(data.metode === "Debit"){
-
-    debit += data.total;
-
-  }
-
-  if(data.metode === "QRIS"){
-
-    qris += data.total;
-
-  }
 
     // daftar item
     let daftarItem = "";
@@ -318,6 +346,27 @@ document.getElementById(
 ).innerText =
   formatRupiah(qris);
 
+// REPORT BULANAN
+
+document.getElementById(
+  "totalBulanan"
+).innerText =
+  formatRupiah(totalBulanan);
+
+document.getElementById(
+  "cashBulanan"
+).innerText =
+  formatRupiah(cashBulanan);
+
+document.getElementById(
+  "debitBulanan"
+).innerText =
+  formatRupiah(debitBulanan);
+
+document.getElementById(
+  "qrisBulanan"
+).innerText =
+  formatRupiah(qrisBulanan);
 }
 
 loadRiwayat();
@@ -544,59 +593,6 @@ document.getElementById(
 
 }
 
-window.filterLaporan = async function(){
-
-  const tanggal =
-    document.getElementById(
-      "filterTanggal"
-    ).value;
-
-  if(!tanggal){
-
-    alert("Pilih tanggal!");
-
-    return;
-
-  }
-
-  const querySnapshot =
-    await getDocs(collection(db, "transaksi"));
-
-  let total = 0;
-
-  querySnapshot.forEach((doc) => {
-
-    const data = doc.data();
-
-    if(data.createdAt){
-
-      const tgl =
-        new Date(
-          data.createdAt.seconds * 1000
-        );
-
-      const formatTanggal =
-        tgl.toISOString().split("T")[0];
-
-      if(formatTanggal === tanggal){
-
-        total += data.total;
-
-      }
-
-    }
-
-  });
-
-  alert(
-    "Pendapatan tanggal " +
-    tanggal +
-    "\n\nTotal: " +
-    formatRupiah(total)
-  );
-
-}
-
 window.showHarian = function(){
 
   document.getElementById(
@@ -604,19 +600,19 @@ window.showHarian = function(){
   ).style.display = "grid";
 
   document.getElementById(
-    "reportSemua"
+    "reportBulanan"
   ).style.display = "none";
 
 }
 
-window.showSemua = function(){
+window.showBulanan = function(){
 
   document.getElementById(
     "reportHarian"
   ).style.display = "none";
 
   document.getElementById(
-    "reportSemua"
+    "reportBulanan"
   ).style.display = "grid";
 
 }

@@ -106,15 +106,6 @@
 
   <h2>📊 Reporting Pendapatan</h2>
 
-  <input
-  type="date"
-  id="filterTanggal"
->
-
-<button onclick="filterLaporan()">
-
-  Cari Tanggal
-
 </button>
 
   <button onclick="toggleReport()">
@@ -128,40 +119,27 @@
 <div class="report-box"
   id="reportContainer">
 
-  <h2>📊 Reporting Pendapatan</h2>
-
   <!-- REPORTING -->
 
 <div class="report-section">
 
-  <div class="report-top">
+  <div class="report-header">
 
     <h2>
       📊 Reporting Pendapatan
     </h2>
 
-    <div class="report-actions">
+    <button onclick="toggleReport()">
 
-      <input
-        type="date"
-        id="filterTanggal"
-      >
+      Lihat / Sembunyikan
 
-      <button onclick="filterLaporan()">
-        Cari
-      </button>
-
-      <button onclick="toggleReport()">
-        Lihat / Sembunyikan
-      </button>
-
-    </div>
+    </button>
 
   </div>
 
   <div id="reportContainer">
 
-    <!-- tombol pilihan -->
+    <!-- tombol menu -->
 
     <div class="report-menu">
 
@@ -171,9 +149,9 @@
 
       </button>
 
-      <button onclick="showSemua()">
+      <button onclick="showBulanan()">
 
-        Report Keseluruhan
+        Report Bulanan
 
       </button>
 
@@ -227,6 +205,60 @@
       </div>
 
     </div>
+
+    <!-- REPORT BULANAN -->
+
+    <div
+      class="report-grid"
+      id="reportBulanan"
+      style="display:none;"
+    >
+
+      <div class="card-report">
+
+        <h3>Total Bulan Ini</h3>
+
+        <h1 id="totalBulanan">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>Cash</h3>
+
+        <h1 id="cashBulanan">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>Debit</h3>
+
+        <h1 id="debitBulanan">
+          Rp 0
+        </h1>
+
+      </div>
+
+      <div class="card-report">
+
+        <h3>QRIS</h3>
+
+        <h1 id="qrisBulanan">
+          Rp 0
+        </h1>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
     <!-- REPORT SEMUA -->
 
