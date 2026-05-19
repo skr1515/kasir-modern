@@ -317,14 +317,87 @@ window.bayarSekarang = async function(){
 
     });
 
-    alert(
-      "Pembayaran berhasil!\n\n" +
+   // daftar item struk
+let daftarStruk = "";
 
-      "Nama: " + nama + "\n" +
-      "Metode: " + metode + "\n" +
-      "Total: " + formatRupiah(totalBayar) + "\n" +
-      "Kembalian: " + formatRupiah(kembalian)
-    );
+keranjang.forEach((item) => {
+
+  daftarStruk +=
+    item.menu +
+    " x" + item.qty +
+    " = " +
+    formatRupiah(item.total) +
+    "<br>";
+
+});
+
+// popup struk
+const struk = `
+  <div
+    style="
+      font-family: monospace;
+      padding:20px;
+    "
+  >
+
+    <h2 style="text-align:center;">
+      🌿 Cafe Rindu
+    </h2>
+
+    <hr>
+
+    <p>
+      Nama: ${nama}
+    </p>
+
+    <p>
+      Metode: ${metode}
+    </p>
+
+    <hr>
+
+    ${daftarStruk}
+
+    <hr>
+
+    <p>
+      Total:
+      ${formatRupiah(totalBayar)}
+    </p>
+
+    <p>
+      Bayar:
+      ${formatRupiah(
+        uangBayar || totalBayar
+      )}
+    </p>
+
+    <p>
+      Kembalian:
+      ${formatRupiah(kembalian)}
+    </p>
+
+    <hr>
+
+    <p style="text-align:center;">
+      Terima Kasih ☕
+    </p>
+
+  </div>
+`;
+
+// buka window print
+const win = window.open(
+  "",
+  "",
+  "width=400,height=600"
+);
+
+win.document.write(struk);
+
+win.document.close();
+
+win.print();
 
     // reset tabel
     document.getElementById("tbody").innerHTML = "";
@@ -361,3 +434,11 @@ window.logout = function(){
     "login.html";
 
 }
+
+document.getElementById(
+  "userLogin"
+).innerText =
+
+  "👋 Halo, " +
+
+  localStorage.getItem("username");
