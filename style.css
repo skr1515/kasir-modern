@@ -443,18 +443,18 @@ table tbody tr{
   font-weight: 600;
 }
 
-#sortTanggal{
+th select{
 
-  padding: 10px;
-
-  border-radius: 10px;
+  background: transparent;
 
   border: none;
 
-  background: white;
+  color: white;
 
   font-size: 14px;
 
-  margin-left: 10px;
+  cursor: pointer;
+
+  outline: none;
 
 }
