@@ -304,3 +304,102 @@ table tbody tr{
   color: #4f7c4f;
   font-size: 35px;
 }
+
+/* LOGIN */
+
+.login-container{
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  min-height: 100vh;
+}
+
+.login-box{
+
+  width: 400px;
+
+  background: rgba(255,255,255,0.7);
+
+  padding: 40px;
+
+  border-radius: 25px;
+
+  text-align: center;
+
+  backdrop-filter: blur(10px);
+}
+
+.login-box h1{
+
+  color: #5c4033;
+
+  margin-bottom: 10px;
+}
+
+.login-box p{
+
+  margin-bottom: 30px;
+
+  color: #777;
+}
+
+.login-box input{
+
+  width: 100%;
+
+  padding: 15px;
+
+  margin-bottom: 15px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 14px;
+}
+
+.login-box button{
+
+  width: 100%;
+
+  padding: 15px;
+
+  border: none;
+
+  background: #4f7c4f;
+
+  color: white;
+
+  border-radius: 14px;
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+/* LOGOUT */
+
+.logout-btn{
+
+  position: fixed;
+
+  top: 20px;
+
+  right: 20px;
+
+  background: #d9534f;
+
+  color: white;
+
+  border: none;
+
+  padding: 12px 20px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  z-index: 999;
+}

@@ -1,3 +1,10 @@
+if(localStorage.getItem("isLogin") !== "true"){
+
+  window.location.href =
+    "login.html";
+
+}
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
@@ -343,5 +350,14 @@ window.bayarSekarang = async function(){
     console.error(error);
 
   }
+
+}
+
+window.logout = function(){
+
+  localStorage.removeItem("isLogin");
+
+  window.location.href =
+    "login.html";
 
 }
