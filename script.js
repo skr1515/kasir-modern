@@ -12,7 +12,7 @@ import {
   collection,
   addDoc,
   getDocs,
-  updateDogitc,
+  updateDoc,
   deleteDoc,
   doc
 }
@@ -858,3 +858,77 @@ window.hapusProduk = async function(id){
   }
 
 }
+
+window.tambahProduk = async function(){
+
+  const namaProduk =
+    document.getElementById("namaProduk").value;
+
+  const hargaProduk =
+    parseInt(
+      document.getElementById("hargaProduk").value
+    );
+
+  if(!namaProduk || !hargaProduk){
+
+    alert("Isi nama dan harga produk!");
+
+    return;
+
+  }
+
+  try{
+
+    await addDoc(
+      collection(db, "produk"),
+      {
+        nama: namaProduk,
+        harga: hargaProduk
+      }
+    );
+
+    alert("Produk berhasil ditambahkan!");
+
+    document.getElementById(
+      "namaProduk"
+    ).value = "";
+
+    document.getElementById(
+      "hargaProduk"
+    ).value = "";
+
+    loadProduk();
+
+  } catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+async function loadProduk(){
+
+  const querySnapshot =
+    await getDocs(collection(db, "produk"));
+
+  const menu =
+    document.getElementById("menu");
+
+  menu.innerHTML = "";
+
+  querySnapshot.forEach((doc) => {
+
+    const data = doc.data();
+
+    menu.innerHTML += `
+      <option value="${data.harga}">
+        ${data.nama} - ${data.harga}
+      </option>
+    `;
+
+  });
+
+}
+
+loadProduk();
