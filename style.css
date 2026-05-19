@@ -403,3 +403,42 @@ table tbody tr{
 
   z-index: 999;
 }
+
+/* REPORT HEADER */
+
+.report-header{
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 50px;
+
+  margin-bottom: 20px;
+}
+
+.report-header h2{
+
+  color: #5c4033;
+
+  font-size: 35px;
+}
+
+.report-header button{
+
+  background: #e8d5c4;
+
+  border: none;
+
+  padding: 12px 25px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  color: #5c4033;
+
+  font-weight: 600;
+}

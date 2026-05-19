@@ -146,6 +146,25 @@ async function loadRiwayat(){
 
   // tanggal hari ini
   docs.forEach((data) => {
+  
+    // cek tanggal hari ini
+
+const today =
+  new Date().toLocaleDateString();
+
+const tanggalTransaksi =
+  data.createdAt
+    ? new Date(
+        data.createdAt.seconds * 1000
+      ).toLocaleDateString()
+    : "";
+
+// kalau bukan hari ini skip
+if(tanggalTransaksi !== today){
+
+  return;
+
+}
 
   // total semua transaksi
   totalHarian += data.total;
@@ -442,3 +461,22 @@ document.getElementById(
   "👋 Halo, " +
 
   localStorage.getItem("username");
+
+  window.toggleReport = function(){
+
+  const report =
+    document.getElementById(
+      "reportContainer"
+    );
+
+  if(report.style.display === "none"){
+
+    report.style.display = "block";
+
+  } else {
+
+    report.style.display = "none";
+
+  }
+
+}
