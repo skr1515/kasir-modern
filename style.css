@@ -442,3 +442,19 @@ table tbody tr{
 
   font-weight: 600;
 }
+
+#sortTanggal{
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  border: none;
+
+  background: white;
+
+  font-size: 14px;
+
+  margin-left: 10px;
+
+}

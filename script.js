@@ -151,12 +151,30 @@ let qrisBulanan = 0;
   });
 
   // urut terbaru
+  const sort =
+  document.getElementById(
+    "sortTanggal"
+  ).value;
+
+if(sort === "terbaru"){
+
   docs.sort((a, b) => {
 
     return b.createdAt.seconds -
            a.createdAt.seconds;
 
   });
+
+} else {
+
+  docs.sort((a, b) => {
+
+    return a.createdAt.seconds -
+           b.createdAt.seconds;
+
+  });
+
+}
 
   // tanggal hari ini
   docs.forEach((data) => {

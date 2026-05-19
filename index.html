@@ -300,7 +300,22 @@
 <div class="riwayat-header">
 
   <h2>Riwayat Transaksi</h2>
+<select id="sortTanggal"
+  onchange="loadRiwayat()">
 
+  <option value="terbaru">
+
+    Terbaru
+
+  </option>
+
+  <option value="terlama">
+
+    Terlama
+
+  </option>
+
+</select>
   <button onclick="toggleRiwayat()">
     Lihat / Sembunyikan
   </button>
