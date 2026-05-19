@@ -151,10 +151,15 @@ let qrisBulanan = 0;
   });
 
   // urut terbaru
-  const sort =
+  const sortElement =
   document.getElementById(
     "sortTanggal"
-  ).value;
+  );
+
+const sort =
+  sortElement
+    ? sortElement.value
+    : "terbaru";
 
 if(sort === "terbaru"){
 
