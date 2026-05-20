@@ -747,29 +747,31 @@ window.loadProduk = async function(){
 
         <td>
 
-          <button
-            onclick="editProduk(
-              '${docSnap.id}',
-              '${data.nama}',
-              '${data.harga}'
-            )"
-          >
+  ${
+    role === "admin"
+    ? `
+      <button
+        onclick="editProduk(
+          '${docSnap.id}',
+          '${data.nama}',
+          '${data.harga}'
+        )"
+      >
+        Edit
+      </button>
 
-            Edit
+      <button
+        onclick="hapusProduk(
+          '${docSnap.id}'
+        )"
+      >
+        Hapus
+      </button>
+    `
+    : "-"
+  }
 
-          </button>
-
-          <button
-            onclick="hapusProduk(
-              '${docSnap.id}'
-            )"
-          >
-
-            Hapus
-
-          </button>
-
-        </td>
+</td>
 
       </tr>
 
@@ -869,14 +871,19 @@ if(role !== "admin"){
     ".produk-box"
   ).style.display = "none";
 
-  document.querySelector(
-  ".produk-box"
-).style.display = "none";
+  // CEK ROLE ADMIN
 
-document.getElementById(
-  "produkBody"
-).parentElement.parentElement.style.display =
-  "none";
+const role =
+  localStorage.getItem("role");
+
+if(role !== "admin"){
+
+  // sembunyikan form tambah produk
+  document.querySelector(
+    ".produk-box"
+  ).style.display = "none";
+
+}
 }
 
 // PALING BAWAH
