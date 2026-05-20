@@ -858,6 +858,27 @@ window.hapusProduk = async function(id){
 
 }
 
+// CEK ROLE ADMIN
+
+const role =
+  localStorage.getItem("role");
+
+if(role !== "admin"){
+
+  document.querySelector(
+    ".produk-box"
+  ).style.display = "none";
+
+  document.querySelector(
+  ".produk-box"
+).style.display = "none";
+
+document.getElementById(
+  "produkBody"
+).parentElement.parentElement.style.display =
+  "none";
+}
+
 // PALING BAWAH
 window.loadRiwayat();
 window.loadProduk();
